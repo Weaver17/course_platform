@@ -10,9 +10,13 @@ import {
 import { createdAt, id, updatedAt } from "../schemaHelpers";
 import { CourseProductTable } from "./courseProduct";
 
+//
 export const productStatuses = ["public", "private"] as const;
+
 export type ProductStatus = (typeof productStatuses)[number];
+
 export const productStatusEnum = pgEnum("product_status", productStatuses);
+//
 
 export const ProductTable = pgTable("products", {
   id,

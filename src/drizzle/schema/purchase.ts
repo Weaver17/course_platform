@@ -7,8 +7,9 @@ import {
   uuid,
 } from "drizzle-orm/pg-core";
 import { UserTable } from "./user";
-import { ProductTable } from "./products";
+import { ProductTable } from "./product";
 import { createdAt, id, updatedAt } from "../schemaHelpers";
+import { relations } from "drizzle-orm";
 
 export const PurchaseTable = pgTable("purchases", {
   id,
@@ -27,3 +28,14 @@ export const PurchaseTable = pgTable("purchases", {
   createdAt,
   updatedAt,
 });
+
+export const PurchaseRelationships = relations(PurchaseTable, ({ one }) => ({
+  user: one(UserTable, {
+    fields: [PurchaseTable.userId],
+    references: [UserTable.id],
+  }),
+  product: one(ProductTable, {
+    fields: [PurchaseTable.productId],
+    references: [ProductTable.id],
+  }),
+}));

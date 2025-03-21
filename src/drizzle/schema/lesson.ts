@@ -3,6 +3,7 @@ import { createdAt, id, updatedAt } from "../schemaHelpers";
 import { CourseTable } from "./course";
 import { relations } from "drizzle-orm";
 import { CourseSectionTable } from "./courseSection";
+import { UserLessonCompleteTable } from "./userLessonComplete";
 
 //
 export const lessonStatuses = ["public", "private"] as const;
@@ -26,9 +27,10 @@ export const LessonTable = pgTable("lessons", {
   updatedAt,
 });
 
-export const LessonRelationships = relations(LessonTable, ({ one }) => ({
+export const LessonRelationships = relations(LessonTable, ({ one, many }) => ({
   course: one(CourseSectionTable, {
     fields: [LessonTable.sectionId],
     references: [CourseSectionTable.id],
   }),
+  userLessonsComplete: many(UserLessonCompleteTable),
 }));

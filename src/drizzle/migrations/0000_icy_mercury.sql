@@ -66,7 +66,7 @@ CREATE TABLE "purchases" (
 --> statement-breakpoint
 CREATE TABLE "users" (
 	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
-	"clserkUserId" text NOT NULL,
+	"clerkUserId" text NOT NULL,
 	"email" text NOT NULL,
 	"name" text NOT NULL,
 	"role" "user_role" DEFAULT 'user' NOT NULL,
@@ -74,7 +74,7 @@ CREATE TABLE "users" (
 	"deletedAt" timestamp with time zone,
 	"createdAt" timestamp with time zone DEFAULT now() NOT NULL,
 	"updatedAt" timestamp with time zone DEFAULT now() NOT NULL,
-	CONSTRAINT "users_clserkUserId_unique" UNIQUE("clserkUserId")
+	CONSTRAINT "users_clerkUserId_unique" UNIQUE("clerkUserId")
 );
 --> statement-breakpoint
 CREATE TABLE "user_course_access" (
